@@ -47,25 +47,22 @@ module.exports.removeMessage = () => {
 "use strict";
 
 let messageController = require("./appData");
-let input = document.getElementById("input");
 
-
-
-input.addEventListener("keypress", (e) => {
+$("#input").keypress((e) => {
     let msgArr = messageController.getMessages();
     let output = require ("./outputToDom");
     const key = e.which || e.keyCode;
     if (key === 13){
-        let message = input.value;
+        let message = $("#input").val();
         let msgObject = {};
         msgObject.msg = message;
         let arrayWithInput = messageController.addNewMessage(msgObject);
         output.updateDom(arrayWithInput);
-        input.value=""; 
+        $("#input").val(""); 
         return arrayWithInput; //GET NEW ARRAY ADD
     }
-    
-});
+    });
+
 
 
 },{"./appData":1,"./outputToDom":6}],4:[function(require,module,exports){
@@ -91,10 +88,7 @@ const parseMsg = (ajaxData) => {
         console.log("array with json",arrayWithJson); 
          output.updateDom(arrayWithJson);
     });
-    // for (let i = 0; i < ajaxData.messages.length; i++) {
-    //     let arrayWithJson = messageController.addNewMessage(ajaxData.messages[i]); 
-    //     output.updateDom(arrayWithJson);
-    // }      
+
 };
 
 
@@ -178,21 +172,17 @@ drkTheme.addEventListener("click", function(){
 
 },{"./appData":1,"./delete":2,"./input":3,"./jsonData":4,"./outputToDom":6}],6:[function(require,module,exports){
 "use strict";
-let outputDiv = document.getElementById("output");
+let outputDiv = $("#output");
 
 
 module.exports.updateDom = (objectArr) => {
-    outputDiv.innerHTML = "";
+    outputDiv.text("");
     for(let i = 0; i < objectArr.length; i++) {
-        outputDiv.innerHTML += `<div id = "${i}"class="parent">${objectArr[i].msg} <button class="delete">Delete</button></div>`;
+        outputDiv.append($(`<div id = "${i}"class="parent">${objectArr[i].msg} <button class="delete">Delete</button></div>`));
     }
     if (objectArr.length === 0){
-        document.getElementById("clear").disabled = true;
-    }else{
-        document.getElementById("clear").disabled = false;
-    }
-
-    
+        $("#clear").attr("disabled");
+    }   
 };
 
 
