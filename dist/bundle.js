@@ -181,12 +181,8 @@ module.exports.updateDom = (objectArr) => {
         outputDiv.append($(`<div id = "${i}"class="parent">${objectArr[i].msg} <button class="delete">Delete</button></div>`));
     }
     if (objectArr.length === 0){
-        document.getElementById("clear").disabled = true;
-    }else{
-        document.getElementById("clear").disabled = false;
-    }
-
-    
+        $("#clear").attr("disabled");
+    }   
 };
 
 
