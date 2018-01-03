@@ -5,6 +5,7 @@ let input = document.getElementById("input");
 
 
 
+
 input.addEventListener("keypress", (e) => {
     let msgArr = messageController.getMessages();
     let output = require ("./outputToDom");
