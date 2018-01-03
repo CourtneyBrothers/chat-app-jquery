@@ -47,25 +47,22 @@ module.exports.removeMessage = () => {
 "use strict";
 
 let messageController = require("./appData");
-let input = document.getElementById("input");
 
-
-
-input.addEventListener("keypress", (e) => {
+$("#input").keypress((e) => {
     let msgArr = messageController.getMessages();
     let output = require ("./outputToDom");
     const key = e.which || e.keyCode;
     if (key === 13){
-        let message = input.value;
+        let message = $("#input").val();
         let msgObject = {};
         msgObject.msg = message;
         let arrayWithInput = messageController.addNewMessage(msgObject);
         output.updateDom(arrayWithInput);
-        input.value=""; 
+        $("#input").val(""); 
         return arrayWithInput; //GET NEW ARRAY ADD
     }
-    
-});
+    });
+
 
 
 },{"./appData":1,"./outputToDom":6}],4:[function(require,module,exports){
@@ -91,10 +88,7 @@ const parseMsg = (ajaxData) => {
         console.log("array with json",arrayWithJson); 
          output.updateDom(arrayWithJson);
     });
-    // for (let i = 0; i < ajaxData.messages.length; i++) {
-    //     let arrayWithJson = messageController.addNewMessage(ajaxData.messages[i]); 
-    //     output.updateDom(arrayWithJson);
-    // }      
+
 };
 
 
